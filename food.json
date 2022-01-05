@@ -1,0 +1,87 @@
+[
+    {
+        "id": 1,
+        "name": "Cheese Pizza",
+        "image": "images/cheesepizza.jpeg",
+        "price": "$5.00",
+        "type": "pizza"
+    },
+    {
+        "id": 2,
+        "name": "Pepperoni Pizza",
+        "image": "images/pepperonipizza.jpeg",
+        "price": "$6.00",
+        "type": "pizza"
+    },
+    {
+        "id": 3,
+        "name": "Sausage Pizza",
+        "image": "images/sausagepizza.jpeg",
+        "price": "$6.00",
+        "type": "pizza"
+    },
+    {
+        "id": 4,
+        "name": "Water",
+        "image": "images/water.jpeg",
+        "price": "$1.00",
+        "type": "drink"
+    },
+    {
+        "id": 5,
+        "name": "Sprite",
+        "image": "images/sprite.jpeg",
+        "price": "$1.50",
+        "type": "drink"
+    },
+    {
+        "id": 6,
+        "name": "Fries",
+        "image": "images/fries.jpeg",
+        "price": "$2.50",
+        "type": "side"
+    },
+    {
+        "id": 7,
+        "name": "Nachos",
+        "image": "images/nachos.jpeg",
+        "price": "$2.50",
+        "type": "side"
+    },
+    {
+        "id": 8,
+        "name": "Salad",
+        "image": "images/salad.jpeg",
+        "price": "$2.50",
+        "type": "side"
+    },
+    {
+        "id": 9,
+        "name": "Coke",
+        "image": "images/coke.jpeg",
+        "price": "$1.50",
+        "type": "drink"
+    },
+    {
+        "id": 10,
+        "name": "Cookies",
+        "image": "images/cookies.jpeg",
+        "price": "$2.00",
+        "type": "dessert"
+    },
+    {
+        "id": 11,
+        "name": "Cinnasticks",
+        "image": "images/cinnasticks.jpeg",
+        "price": "$2.00",
+        "type": "dessert"
+    },
+    {
+        "id": 12,
+        "name": "Brownies",
+        "image": "images/brownies.jpeg",
+        "type": "dessert"
+    }
+    
+]
+  
