@@ -80,6 +80,7 @@
     "id": 12,
     "name": "Brownies",
     "image": "images/brownies.jpeg",
+    "price": "$2.00",
     "type": "dessert"
   }
 ]

@@ -24,7 +24,7 @@
   <body>
     <div class="ticket-view">
       <h1 style="text-align: center">Ticket</h1>
-      <p></p>
+      <div class="ticketList"></div>
     </div>
 
     <div class="order-section">
@@ -98,6 +98,7 @@
                 }
               }
               populateContent(leList);
+              addEvents();
             });
         }
       });
@@ -113,17 +114,70 @@
         foodbox.insertAdjacentHTML(
           "beforeend",
           `
-              <article>
+              <article class = "foodItem" style="background-color: lightgray">
                 <br />
                 <br />
-                <h2>${item.name}</h2>
-                ${type}
-                <h2>${item.price}</h2>
+                <h2 class="itemName">${item.name}</h2>
+                <h3>${item.type}</h3>
                 <img src="${item.image}">
+                <button class="addListBtn">Add To Ticket!!</button>
               </article>
               `
         );
       }
+      buttons();
     }
+
+    // function addEvents() {
+    //   const foodItems = document.querySelectorAll(".foodItem");
+    //   const ticketList = document.querySelector("#ticketList");
+    //   for (const item of foodItems) {
+    //     item.addEventListener("click", () => {
+    //       console.log(item);
+    //     });
+    //   }
+    // }
+
+    // function pleasework(items, leList) {
+    //   leList = [];
+    //   foodbox.innerHTML = "";
+    //   for (const item of items) {
+    //     const type = item.type
+    //       .split("\n\n")
+    //       .map((p) => `<p>${p}</p>`)
+    //       .join("");
+    //     foodbox.insertAdjacentHTML(
+    //       "beforeend",
+    //       `
+    //           <article class = "foodItem">
+    //             <h2>${item.name}</h2>
+    //           `
+    //     );
+    //   }
+    // }
+    function buttons() {
+      var AddItemBtns = document.getElementsByClassName("addListBtn");
+      for (let i = 0; i < AddItemBtns.length; i++) {
+        var button = AddItemBtns[i];
+        button.addEventListener("click", AddItem);
+      }
+    }
+
+    function AddItem(event) {
+      var button = event.target;
+      var item_card = button.parentElement;
+      var item_name = item_card.getElementsByClassName("itemName")[0].innerText;
+      var contents = `<p class="item_name">${item_name}</p>`;
+      var item_on_ticket = document.createElement("div");
+      item_on_ticket.innerHTML = contents;
+      document.getElementsByClassName("ticketList")[0].append(item_on_ticket);
+    }
+
+    // function display() {
+    //   yeet = document.getElementsByClassName("ticketList");
+    //   yeet.removeAllChildNodes;
+    //   for (let item in list) {
+    //   }
+    // }
   </script>
 </html>
