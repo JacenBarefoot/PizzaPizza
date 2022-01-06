@@ -1,5 +1,5 @@
 nav {
-  background-color: black;
+  background-color: rgb(189, 4, 4);
   overflow: hidden;
   color: white;
 }
@@ -21,4 +21,24 @@ nav a:hover {
 
 .order_now_btn:hover {
   cursor: pointer;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-right: 6%;
+  margin-top: 3%;
+}
+
+.card1 {
+  background-color: steelblue;
+  padding: 2em;
+  width: 10em;
+  margin-left: 10%;
+  height: 18em;
+  box-shadow: 5px 5px 20px black;
+  color: ghostwhite;
+  border-radius: 2em;
 }

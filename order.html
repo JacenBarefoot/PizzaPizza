@@ -20,15 +20,25 @@
       top: 0;
       width: 100%;
     }
+    .sticky2 {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
   </style>
-  <body>
+  <body onload="loadAll()">
     <div class="ticket-view">
+      <a href="index.html" style="margin-left: 1em">Homepage</a>
+
       <h1 style="text-align: center">Ticket</h1>
+
       <div class="ticketList"></div>
+      <div class="sticky2">
+        <a class="placeBtn" href="pay.html">Place Order</a>
+      </div>
     </div>
 
     <div class="order-section">
-      <a href="index.html" style="text-align: center">Homepage</a>
       <nav class="sticky">
         <a class="Btn" name="drink">Drinks</a>
         <a class="Btn" name="pizza">Pizza</a>
@@ -98,7 +108,6 @@
                 }
               }
               populateContent(leList);
-              addEvents();
             });
         }
       });
@@ -117,44 +126,20 @@
               <article class = "foodItem" style="background-color: lightgray">
                 <br />
                 <br />
-                <h2 class="itemName">${item.name}</h2>
-                <h3>${item.type}</h3>
-                <img src="${item.image}">
-                <button class="addListBtn">Add To Ticket!!</button>
+                <div style="margin-left: 1em; margin-top: 2em">
+                  <div">
+                    <h2 class="itemName">${item.name}</h2>
+                    <h2 class="itemPrice">${item.price}</h2>
+                    <img style="width: 300px; height: 300px; border: 1.5px solid black" src="${item.image}">
+                    <button style="width: 5em; height: 5em"class="addListBtn">Add To Ticket!!</button>
+                  </div>
+                </div>
               </article>
               `
         );
       }
       buttons();
     }
-
-    // function addEvents() {
-    //   const foodItems = document.querySelectorAll(".foodItem");
-    //   const ticketList = document.querySelector("#ticketList");
-    //   for (const item of foodItems) {
-    //     item.addEventListener("click", () => {
-    //       console.log(item);
-    //     });
-    //   }
-    // }
-
-    // function pleasework(items, leList) {
-    //   leList = [];
-    //   foodbox.innerHTML = "";
-    //   for (const item of items) {
-    //     const type = item.type
-    //       .split("\n\n")
-    //       .map((p) => `<p>${p}</p>`)
-    //       .join("");
-    //     foodbox.insertAdjacentHTML(
-    //       "beforeend",
-    //       `
-    //           <article class = "foodItem">
-    //             <h2>${item.name}</h2>
-    //           `
-    //     );
-    //   }
-    // }
     function buttons() {
       var AddItemBtns = document.getElementsByClassName("addListBtn");
       for (let i = 0; i < AddItemBtns.length; i++) {
@@ -167,17 +152,20 @@
       var button = event.target;
       var item_card = button.parentElement;
       var item_name = item_card.getElementsByClassName("itemName")[0].innerText;
-      var contents = `<p class="item_name">${item_name}</p>`;
+      var item_price =
+        item_card.getElementsByClassName("itemPrice")[0].innerText;
+      var contents = `<p style="margin-left: 1em"class="item_name">${item_name}----${item_price}</p>`;
       var item_on_ticket = document.createElement("div");
       item_on_ticket.innerHTML = contents;
       document.getElementsByClassName("ticketList")[0].append(item_on_ticket);
     }
 
-    // function display() {
-    //   yeet = document.getElementsByClassName("ticketList");
-    //   yeet.removeAllChildNodes;
-    //   for (let item in list) {
-    //   }
-    // }
+    function loadAll() {
+      fetch("food.json")
+        .then((req) => req.json())
+        .then((data) => {
+          populateContent(data);
+        });
+    }
   </script>
 </html>

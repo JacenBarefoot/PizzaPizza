@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="styles.css" rel="stylesheet" type="text/css" />
+  </head>
+  <style>
+      body {
+          padding: 0;
+          margin: 0;
+          justify-content: center;
+      }
+
+      .box1 {
+        width: 500px;
+        height: 500px;
+        background-color: rgb(189, 4, 4);
+        padding: 20px;
+        margin: 8% auto 0;
+        text-align: center;
+        position: relative;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        border-radius: 25px;
+      }
+
+      .payBtn {
+          height: 100px;
+          width: 100px;
+          color: darkred;
+          background-color: lightgray;
+          text-align: center;
+          border-radius: 25px;
+      }
+
+      .laterBtn {
+          height: 100px;
+          width: 100px;
+          color: darkred;
+          background-color: lightgray;
+          text-align: center;
+          border-radius: 25px;
+      }
+
+
+  </style>
+  <body style="background-color: lightgray">
+    <div class="box1">
+        <div class="box2">
+            <div class="payBtn">Pay now</div>
+        </div>
+        <div class="box3">
+            <div class="laterBtn">Pay later</div>
+        </div>
+    </div>
+    </div>
+  </body>
+  <script>
+      const pay = document.querySelector(".payBtn")
+
+      pay.addEventListener("click", ()=> {
+        console.log("for later use")
+      })
+  </script>
+</html>
