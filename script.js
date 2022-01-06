@@ -1,31 +1,37 @@
-const itemContainer = document.querySelector(".content");
-const sidesBtn = document.querySelector(".sidesBtn");
-const drinksBtn = document.querySelector(".drinksBtn");
-const pizzaBtn = document.querySelector(".pizzaBtn");
-const dessertBtn = document.querySelector(".dessertBtn");
+const foodbox = document.querySelectorAll(".content");
+const menu = document.querySelectorAll(".Btn");
 
-function populateContent(items) {
-  itemContainer.innerHTML = "";
-  for (const item of items) {
-    const price = item.price
-      .split("\n\n")
-      .map((p) => `<p>${p}</p>`)
-      .join("");
-    itemContainer.insertAdjacentHTML(
-      "beforeend",
-      `
-        <article>
-            <h2>${item.name}</h2>
-            ${paragraphs}
-        </article>`
-    );
-  }
-}
-
-fetch("food.json")
-  .then((req) => req.json())
-  .then((items) => populateContent());
-
-drinksBtn.addEventListener("click", () => {
-  populateContent(blah);
+menu.forEach((m) => {
+  m.addEventListener("click", () => {
+    fetch("food.json")
+      .then((req) => req.json())
+      .then((data) => console.log(data));
+  });
+  m.addEventListener("click", (e) => {
+    console.log(e.target.innerHTML);
+    foodbox.forEach((box) => {
+      box.classList.add("d-none");
+      if (e.target.innerHTML === "All") {
+        fetch("food.json")
+          .then((req) => req.json())
+          .then((data) => console.log(data));
+      } else if (e.target.innerHTML === "Pizza") {
+        fetch("food.json")
+          .then((req) => req.json())
+          .then((data) => console.log(data));
+      } else if (e.target.innerHTML === "Drinks") {
+        if (box.classList.contains("drink")) {
+          box.classList.remove("d-none");
+        }
+      } else if (e.target.innerHTML === "Sides") {
+        if (box.classList.contains("side")) {
+          box.classList.remove("d-none");
+        }
+      } else if (e.target.innerHTML === "Dessert") {
+        if (box.classList.contains("dessert")) {
+          box.classList.remove("d-none");
+        }
+      }
+    });
+  });
 });

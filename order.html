@@ -1,28 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link href="styles.css" rel="stylesheet" type="text/css">
-    <script src="script.js"></script>
-</head>
-<body>
-    <div class="ticket-view">
-        <h1>Ticket<h1>
-    </div>
-    <div class="order-section">
-        <a href="index.html" style="text-align: center">Menu</a>
-        <nav class="sticky">
-            <a class="drinksBtn">Drinks</a>
-            <a class="pizzaBtn">Pizza</a>
-            <a class="sidesBtn">Sides</a>
-            <a class="dessertBtn">Dessert</a>
-        </nav>
-        <div class="content">
+    <link href="styles.css" rel="stylesheet" type="text/css" />
+  </head>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 50% 50%;
+    }
 
-        </div>
+    .sticky {
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
+  </style>
+  <body>
+    <div class="ticket-view">
+      <h1 style="text-align: center">Ticket</h1>
+      <p></p>
     </div>
-</body>
+
+    <div class="order-section">
+      <a href="index.html" style="text-align: center">Homepage</a>
+      <nav class="sticky">
+        <a class="Btn" name="drink">Drinks</a>
+        <a class="Btn" name="pizza">Pizza</a>
+        <a class="Btn" name="side">Sides</a>
+        <a class="Btn" name="dessert">Dessert</a>
+        <a class="Btn" name="all">All</a>
+      </nav>
+      <div class="content"></div>
+    </div>
+  </body>
+  <script>
+    const foodbox = document.querySelector(".content");
+    const menu = document.querySelectorAll(".Btn");
+
+    menu.forEach((m) => {
+      m.addEventListener("click", (e) => {
+        if (e.target.innerHTML === "All") {
+          fetch("food.json")
+            .then((req) => req.json())
+            .then((data) => {
+              populateContent(data);
+            });
+        } else if (e.target.innerHTML === "Pizza") {
+          let leList = [];
+          fetch("food.json")
+            .then((req) => req.json())
+            .then((data) => {
+              for (const item of data) {
+                if (item.type == "pizza") {
+                  leList.push(item);
+                }
+              }
+              populateContent(leList);
+            });
+        } else if (e.target.innerHTML === "Drinks") {
+          let leList = [];
+          fetch("food.json")
+            .then((req) => req.json())
+            .then((data) => {
+              for (const item of data) {
+                if (item.type == "drink") {
+                  leList.push(item);
+                }
+              }
+              populateContent(leList);
+            });
+        } else if (e.target.innerHTML === "Sides") {
+          let leList = [];
+          fetch("food.json")
+            .then((req) => req.json())
+            .then((data) => {
+              for (const item of data) {
+                if (item.type == "side") {
+                  leList.push(item);
+                }
+              }
+              populateContent(leList);
+            });
+        } else if (e.target.innerHTML === "Dessert") {
+          let leList = [];
+          fetch("food.json")
+            .then((req) => req.json())
+            .then((data) => {
+              for (const item of data) {
+                if (item.type == "dessert") {
+                  leList.push(item);
+                }
+              }
+              populateContent(leList);
+            });
+        }
+      });
+    });
+
+    function populateContent(items) {
+      foodbox.innerHTML = "";
+      for (const item of items) {
+        const type = item.type
+          .split("\n\n")
+          .map((p) => `<p>${p}</p>`)
+          .join("");
+        foodbox.insertAdjacentHTML(
+          "beforeend",
+          `
+              <article>
+                <br />
+                <br />
+                <h2>${item.name}</h2>
+                ${type}
+                <h2>${item.price}</h2>
+                <img src="${item.image}">
+              </article>
+              `
+        );
+      }
+    }
+  </script>
 </html>
