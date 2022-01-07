@@ -154,10 +154,16 @@
       var item_name = item_card.getElementsByClassName("itemName")[0].innerText;
       var item_price =
         item_card.getElementsByClassName("itemPrice")[0].innerText;
-      var contents = `<p style="margin-left: 1em"class="item_name">${item_name}----${item_price}</p>`;
+      var contents = `<p style="margin-left: 1em"class="item_name">${item_name}----${item_price}-----------<button class="removeItem">Remove</button></p>`;
       var item_on_ticket = document.createElement("div");
       item_on_ticket.innerHTML = contents;
-      document.getElementsByClassName("ticketList")[0].append(item_on_ticket);
+      let ticketList = document.getElementsByClassName("ticketList")[0];
+      ticketList.append(item_on_ticket);
+      let buttons = ticketList.getElementsByClassName("removeItem");
+      for (let i = 0; i < buttons.length; i++) {
+        var variable = buttons[i];
+        variable.addEventListener("click", removeItem);
+      }
     }
 
     function loadAll() {
@@ -166,6 +172,11 @@
         .then((data) => {
           populateContent(data);
         });
+    }
+
+    function removeItem(event) {
+      var buttonClicked = event.target;
+      buttonClicked.parentElement.parentElement.remove();
     }
   </script>
 </html>
