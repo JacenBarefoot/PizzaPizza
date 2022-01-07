@@ -11,6 +11,9 @@
     body {
       margin: 0;
       padding: 0;
+    }
+
+    .grid {
       display: grid;
       grid-template-columns: 50% 50%;
     }
@@ -25,19 +28,66 @@
       bottom: 0;
       width: 100%;
     }
-  </style>
-  <body onload="loadAll()">
-    <div class="ticket-view">
-      <a href="index.html" style="margin-left: 1em">Homepage</a>
 
+    .whole {
+      display: grid;
+      grid-template-columns: 50% 50%;
+    }
+
+    .homeBtn {
+      height: 50px;
+      width: 110px;
+      font-size: 18px;
+      background-color: rgb(189, 4, 4);
+      text-align: center;
+      margin: 1.5em;
+      border-radius: 10px;
+      padding-top: 17px;
+    }
+
+    .homeBtn a {
+      color: white;
+    }
+
+    .total {
+      margin-left: 3%;
+    }
+
+    .placeBtn {
+      margin-left: 1.7%;
+      margin-bottom: 15px;
+      height: 40px;
+      width: 110px;
+      background-color: rgb(189, 4, 4);
+      cursor: pointer;
+      text-align: center;
+      margin-top: 2em;
+      padding-top: 1.3em;
+      border-radius: 15px;
+    }
+
+    .placeBtn a {
+      color: white;
+      font-size: 18px;
+    }
+  </style>
+  <body class="grid" onload="loadAll()">
+    <div class="ticket-view">
+      <div class="homeBtn">
+        <a href="index.html">Homepage</a>
+      </div>
       <h1 style="text-align: center">Ticket</h1>
 
-      <div class="ticketList"></div>
+      <div class="ticketList">
+        <!-- Content from js -->
+      </div>
       <div class="sticky2">
-        <a class="placeBtn" href="pay.html">Place Order</a>
+        <h2 class="total">$0</h2>
+        <div class="placeBtn">
+          <a onclick="pay()">Place Order</a>
+        </div>
       </div>
     </div>
-
     <div class="order-section">
       <nav class="sticky">
         <a class="Btn" name="drink">Drinks</a>
@@ -52,6 +102,7 @@
   <script>
     const foodbox = document.querySelector(".content");
     const menu = document.querySelectorAll(".Btn");
+    let pricee = 0;
 
     menu.forEach((m) => {
       m.addEventListener("click", (e) => {
@@ -123,19 +174,15 @@
         foodbox.insertAdjacentHTML(
           "beforeend",
           `
-              <article class = "foodItem" style="background-color: lightgray">
-                <br />
-                <br />
-                <div style="margin-left: 1em; margin-top: 2em">
-                  <div">
-                    <h2 class="itemName">${item.name}</h2>
-                    <h2 class="itemPrice">${item.price}</h2>
-                    <img style="width: 300px; height: 300px; border: 1.5px solid black" src="${item.image}">
-                    <button style="width: 5em; height: 5em"class="addListBtn">Add To Ticket!!</button>
-                  </div>
-                </div>
-              </article>
-              `
+                  <article class = "foodItem" style="background-color: lightgray">
+                    <div style="margin-left: 2em; padding-top:3em">
+                        <h2 class="itemName">${item.name}</h2>
+                        <h2 class="itemPrice">${item.price}</h2>
+                        <img style="width: 300px; height: 300px; border: 1.5px solid black" src="${item.image}">
+                        <button style="width: 5em; height: 5em"class="addListBtn">Add To Ticket!!</button>
+                    </div>
+                  </article>
+                  `
         );
       }
       buttons();
@@ -154,11 +201,27 @@
       var item_name = item_card.getElementsByClassName("itemName")[0].innerText;
       var item_price =
         item_card.getElementsByClassName("itemPrice")[0].innerText;
-      var contents = `<p style="margin-left: 1em"class="item_name">${item_name}----${item_price}-----------<button class="removeItem">Remove</button></p>`;
-      var item_on_ticket = document.createElement("div");
-      item_on_ticket.innerHTML = contents;
+      pricee += Number(item_price);
+      const total = document.querySelector(".total");
+      total.innerHTML = "$" + pricee;
+      var wholeItem = document.createElement("div");
+      wholeItem.classList.add("whole");
+      wholeItem.insertAdjacentHTML(
+        "beforeend",
+        `<article>
+          <div style="margin-bottom: 1em; padding-bottom: 0.1em; margin-left: 8em; border: 2px solid black">
+            <button style="margin-left: 10em; margin-top: 1em" class="removeItem">Remove</button>
+            <div>
+              <p style="text-align: center; padding-left: 0.5em; font-size: 2em; margin-left: 0.5em; margin-right: 0.5em; background-color: #E8E8E8" class="item_name">${item_name}</p>
+            </div>
+            <div>
+              <p style="text-align: center; padding-top: 0.3em; padding-bottom: 0.3em; margin-right: 8em; background-color: lightgrey; margin-left: 7em"class="itemPrice">$${item_price}</p>
+            </div>
+          </div>
+        </article>`
+      );
       let ticketList = document.getElementsByClassName("ticketList")[0];
-      ticketList.append(item_on_ticket);
+      ticketList.append(wholeItem);
       let buttons = ticketList.getElementsByClassName("removeItem");
       for (let i = 0; i < buttons.length; i++) {
         var variable = buttons[i];
@@ -176,7 +239,28 @@
 
     function removeItem(event) {
       var buttonClicked = event.target;
+      var whole = buttonClicked.parentElement.parentElement;
+      var price = whole.querySelector(".itemPrice").innerHTML;
+      price2 = price.substring(1);
+      console.log(price2);
+      pricee -= Number(price2);
+      const total = document.querySelector(".total");
+      total.innerHTML = "$" + pricee;
       buttonClicked.parentElement.parentElement.remove();
+    }
+
+    function pay() {
+      const orderSection = document.querySelector(".order-section");
+      orderSection.style.display = "none";
+      const body = document.querySelector("body");
+      body.classList.remove("grid");
+      body.style.textAlign = "center";
+      const removeItem = document.querySelectorAll(".removeItem");
+      removeItem.forEach((remove) => {
+        remove.style.display = "none";
+      });
+      const pay = document.querySelector(".placeBtn");
+      pay.style.display = "none";
     }
   </script>
 </html>
