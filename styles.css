@@ -42,3 +42,9 @@ nav a:hover {
   color: ghostwhite;
   border-radius: 2em;
 }
+
+.images {
+  width: 300px; 
+  height: 300px; 
+  border: 1.5px solid black;
+}
